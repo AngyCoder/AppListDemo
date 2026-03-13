@@ -98,7 +98,6 @@ fun ScreenshotsList(
                             modifier = Modifier.fillMaxSize()
                         )
 
-                        // Иконка увеличения - всегда работает
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Открыть на весь экран",
@@ -114,7 +113,6 @@ fun ScreenshotsList(
         }
     }
 
-    // Полноэкранный просмотр скриншотов
     if (showFullScreen) {
         ModalBottomSheet(
             onDismissRequest = { showFullScreen = false },
@@ -146,7 +144,6 @@ fun FullScreenGallery(
             .fillMaxSize()
             .padding(top = 16.dp)
     ) {
-        // Кнопка закрытия
         IconButton(
             onClick = onClose,
             modifier = Modifier
@@ -161,7 +158,6 @@ fun FullScreenGallery(
             )
         }
 
-        // Горизонтальный пейджер для полноэкранного просмотра
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize()
@@ -184,7 +180,6 @@ fun FullScreenGallery(
             }
         }
 
-        // Индикатор текущей позиции
         Text(
             text = "${pagerState.currentPage + 1} / ${screenshotResIds.size}",
             modifier = Modifier

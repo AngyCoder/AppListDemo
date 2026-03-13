@@ -37,7 +37,6 @@ fun AppDetailsHeader(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Иконка из ресурсов
         Icon(
             painter = painterResource(id = appDetails.iconResId),
             contentDescription = null,
