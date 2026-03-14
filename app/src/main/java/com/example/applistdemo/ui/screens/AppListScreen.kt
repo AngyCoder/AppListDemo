@@ -26,6 +26,10 @@ import com.example.applistdemo.data.DataSource
 import com.example.applistdemo.ui.components.AppListItem
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Главный экран со списком приложений
+ * Отображает список приложений с возможностью перехода
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(
@@ -34,6 +38,7 @@ fun AppListScreen(
 ) {
     Scaffold(
         topBar = {
+            // Верхняя панель с заголовком и кнопкой меню
             TopAppBar(
                 title = {
                     Text(
@@ -58,6 +63,7 @@ fun AppListScreen(
             )
         }
     ) { paddingValues ->
+        // Список для отображения большого количества элементов
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = paddingValues,

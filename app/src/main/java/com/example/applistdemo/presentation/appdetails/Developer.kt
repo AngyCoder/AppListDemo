@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+// Компонент для отображения информации о разработчике приложения
 @Composable
 fun Developer(
     name: String,

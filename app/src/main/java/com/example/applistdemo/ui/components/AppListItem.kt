@@ -19,6 +19,10 @@ import com.example.applistdemo.data.App
 import com.example.applistdemo.data.DataSource
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Компонент для отображения элемента списка приложений
+ * Используется в главном списке приложений
+ */
 @Composable
 fun AppListItem(
     app: App,
@@ -40,6 +44,7 @@ fun AppListItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Иконка приложения слева
             Icon(
                 painter = painterResource(id = app.iconResId),
                 contentDescription = null,
@@ -48,9 +53,11 @@ fun AppListItem(
 
             Spacer(modifier = Modifier.width(20.dp))
 
+            // Информация о приложении справа
             Column(
                 modifier = Modifier.weight(1f)
             ) {
+                // Название приложения
                 Text(
                     text = app.name,
                     fontWeight = FontWeight.Bold,
@@ -60,6 +67,7 @@ fun AppListItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
+                // Краткое описание
                 Text(
                     text = app.description,
                     fontSize = 15.sp,
@@ -69,6 +77,7 @@ fun AppListItem(
 
                 Spacer(modifier = Modifier.height(4.dp))
 
+                // Категория приложения (выделена цветом)
                 Text(
                     text = app.category,
                     fontSize = 14.sp,

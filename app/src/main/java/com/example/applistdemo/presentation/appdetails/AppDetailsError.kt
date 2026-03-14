@@ -16,6 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Компонент для отображения состояния ошибки
+ * Показывает сообщение об ошибке и кнопку для повторной попытки загрузки
+ */
 @Composable
 fun AppDetailsError(
     onRefreshClick: () -> Unit,

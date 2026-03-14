@@ -14,7 +14,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +27,10 @@ import com.example.applistdemo.domain.appdetails.AppDetails
 import com.example.applistdemo.domain.appdetails.Category
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Главный экран с детальной информацией о приложении
+ * Собирает все компоненты в единый интерфейс с возможностью прокрутки
+ */
 @Composable
 fun AppDetailsScreen(
     appDetails: AppDetails,
@@ -40,6 +43,7 @@ fun AppDetailsScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface)
     ) { paddingValues ->
+        // Основной контейнер с вертикальной прокруткой
         Column(
             modifier = Modifier
                 .fillMaxSize()

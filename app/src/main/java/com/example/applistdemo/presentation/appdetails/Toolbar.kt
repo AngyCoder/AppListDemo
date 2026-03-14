@@ -14,6 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Верхняя панель инструментов
+ * Содержит кнопки навигации назад и действия "Поделиться"
+ */
 @Composable
 fun Toolbar(
     onBackClick: () -> Unit,
@@ -24,6 +28,7 @@ fun Toolbar(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        //Кнопка "Назад" слева
         IconButton(onClick = onBackClick) {
             Icon(
                 imageVector = Icons.AutoMirrored.Default.ArrowBack,
@@ -31,6 +36,8 @@ fun Toolbar(
                 tint = MaterialTheme.colorScheme.primary
             )
         }
+
+        // Кнопка "Поделиться" справа
         IconButton(onClick = onShareClick) {
             Icon(
                 imageVector = Icons.Default.Share,

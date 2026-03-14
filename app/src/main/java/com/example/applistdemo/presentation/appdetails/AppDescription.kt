@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+// Компонент для отображения описания приложения с возможностью разворачивания
 @Composable
 fun AppDescription(
     description: String,

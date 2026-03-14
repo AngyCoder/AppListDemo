@@ -28,6 +28,10 @@ import com.example.applistdemo.domain.appdetails.Category
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 import kotlin.math.roundToInt
 
+/**
+ * Экран деталей приложения с основной информацией
+ * Отображает иконку, название, разработчика, возрастной рейтинг и размер
+ */
 @Composable
 fun AppDetailsHeader(
     appDetails: AppDetails,
@@ -37,6 +41,7 @@ fun AppDetailsHeader(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // Иконка приложения
         Icon(
             painter = painterResource(id = appDetails.iconResId),
             contentDescription = null,
@@ -47,9 +52,11 @@ fun AppDetailsHeader(
 
         Spacer(modifier = Modifier.width(16.dp))
 
+        // Блок с текстовой информацией
         Column(
             modifier = Modifier.weight(1f)
         ) {
+            // Название приложения
             Text(
                 text = appDetails.name,
                 fontWeight = FontWeight.Bold,
@@ -59,6 +66,7 @@ fun AppDetailsHeader(
 
             Spacer(modifier = Modifier.height(4.dp))
 
+            // Разработчик
             Text(
                 text = appDetails.developer,
                 fontSize = 14.sp,
@@ -67,9 +75,11 @@ fun AppDetailsHeader(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Дополнительная информация в две колонки
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // Возрастной рейтинг
                 Column(modifier = Modifier.width(IntrinsicSize.Min)) {
                     Text(
                         text = "${appDetails.ageRating}+",
@@ -85,6 +95,7 @@ fun AppDetailsHeader(
 
                 Spacer(modifier = Modifier.width(16.dp))
 
+                // Размер приложения
                 Column {
                     Text(
                         text = "${appDetails.size.roundToInt()} МБ",

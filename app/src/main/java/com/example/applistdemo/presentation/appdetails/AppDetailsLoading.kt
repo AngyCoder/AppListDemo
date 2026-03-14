@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+// Компонент для отображения состояния загрузки
 @Composable
 fun AppDetailsLoading(modifier: Modifier = Modifier) {
     Box(

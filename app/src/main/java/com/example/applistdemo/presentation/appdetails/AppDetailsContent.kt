@@ -18,6 +18,11 @@ import com.example.applistdemo.domain.appdetails.AppDetails
 import com.example.applistdemo.domain.appdetails.Category
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+/**
+ * Основной контент экрана детальной информации о приложении
+ * Собирает все компоненты в единую структуру страницы
+ */
+
 @Composable
 fun AppDetailsContent(
     content: AppDetailsState.Content,
@@ -32,6 +37,7 @@ fun AppDetailsContent(
     val descriptionCollapsed = content.descriptionCollapsed
 
     Column(modifier) {
+        // Верхняя панель с кнопками навигации и действий
         Toolbar(
             onBackClick = onBackClick,
             onShareClick = onShareClick,
@@ -39,6 +45,7 @@ fun AppDetailsContent(
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Заголовок с иконкой, названием и основной информацией
         AppDetailsHeader(
             appDetails = appDetails,
             modifier = Modifier.padding(horizontal = 16.dp),
@@ -46,6 +53,7 @@ fun AppDetailsContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // Кнопка установки приложения
         InstallButton(
             onClick = onInstallClick,
             modifier = Modifier
@@ -55,7 +63,7 @@ fun AppDetailsContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Используем screenshotResIds вместо screenshotUrlList
+        // Список скриншотов
         ScreenshotsList(
             screenshotResIds = appDetails.screenshotResIds,
             contentPadding = PaddingValues(horizontal = 16.dp),
@@ -63,6 +71,7 @@ fun AppDetailsContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        // Блок с описанием
         AppDescription(
             description = appDetails.description,
             collapsed = descriptionCollapsed,
@@ -81,6 +90,7 @@ fun AppDetailsContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        // Блок с информацией о разработчике
         Developer(
             name = appDetails.developer,
             onClick = onDeveloperClick,
@@ -91,6 +101,7 @@ fun AppDetailsContent(
     }
 }
 
+// Предпросмотр компонента AppDetailsContent с тестовыми данными
 @Preview
 @Composable
 private fun Preview() {
@@ -101,8 +112,8 @@ private fun Preview() {
         category = Category.GAME,
         ageRating = 12,
         size = 223.7f,
-        iconResId = R.drawable.ic_launcher_foreground,  // Исправлено: iconResId вместо iconUrl
-        screenshotResIds = listOf(                       // Исправлено: screenshotResIds вместо screenshotUrlList
+        iconResId = R.drawable.ic_launcher_foreground,
+        screenshotResIds = listOf(
             R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground,
             R.drawable.ic_launcher_foreground

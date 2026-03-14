@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.applistdemo.ui.theme.AppListDemoTheme
 
+// Кнопка установки приложения
 @Composable
 fun InstallButton(
     onClick: () -> Unit,
