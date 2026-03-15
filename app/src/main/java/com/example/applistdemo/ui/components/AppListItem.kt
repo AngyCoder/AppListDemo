@@ -1,7 +1,13 @@
 package com.example.applistdemo.ui.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -12,31 +18,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.applistdemo.data.App
-import com.example.applistdemo.data.DataSource
-import com.example.applistdemo.ui.theme.AppListDemoTheme
 
-/**
- * Компонент для отображения элемента списка приложений
- * Используется в главном списке приложений
- */
+// Компонент для отображения элемента списка приложений (обновленный)
 @Composable
 fun AppListItem(
     app: App,
-    onItemClick: (App) -> Unit
+    onItemClick: () -> Unit,
+    onLogoClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClick(app) }
+            .clickable { onItemClick() }
             .padding(horizontal = 16.dp, vertical = 6.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
+        elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Row(
             modifier = Modifier
@@ -44,56 +42,21 @@ fun AppListItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Иконка приложения слева
             Icon(
                 painter = painterResource(id = app.iconResId),
                 contentDescription = null,
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier
+                    .size(64.dp)
+                    .clickable { onLogoClick() }
             )
 
             Spacer(modifier = Modifier.width(20.dp))
 
-            // Информация о приложении справа
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                // Название приложения
-                Text(
-                    text = app.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    lineHeight = 24.sp
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                // Краткое описание
-                Text(
-                    text = app.description,
-                    fontSize = 15.sp,
-                    lineHeight = 20.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                // Категория приложения (выделена цветом)
-                Text(
-                    text = app.category,
-                    fontSize = 14.sp,
-                    lineHeight = 18.sp,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Medium
-                )
+            Column {
+                Text(text = app.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(text = app.description, fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(text = app.category, fontSize = 14.sp, color = MaterialTheme.colorScheme.primary)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AppListItemPreview() {
-    AppListDemoTheme {
-        AppListItem(app = DataSource.appList[0], onItemClick = {})
     }
 }
