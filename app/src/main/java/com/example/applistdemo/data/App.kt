@@ -8,5 +8,5 @@ data class App(
     val name: String,
     val description: String,
     val category: String,
-    @param:DrawableRes val iconResId: Int
+    @DrawableRes val iconResId: Int
 )

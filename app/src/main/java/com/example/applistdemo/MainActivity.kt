@@ -11,13 +11,11 @@ import com.example.applistdemo.data.DataSource
 import com.example.applistdemo.domain.appdetails.AppDetails
 import com.example.applistdemo.domain.appdetails.Category
 import com.example.applistdemo.presentation.appdetails.AppDetailsScreen
+import com.example.applistdemo.presentation.applist.AppListScreen
 import com.example.applistdemo.ui.navigation.APP_DETAILS_ROUTE
 import com.example.applistdemo.ui.navigation.APP_LIST_ROUTE
 import com.example.applistdemo.ui.navigation.appDetailsRoute
-import com.example.applistdemo.ui.screens.AppListScreen
 import com.example.applistdemo.ui.theme.AppListDemoTheme
-
-// Главное для приложения, управление навигацией.
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,38 +23,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppListDemoTheme {
-                // Навигационный контроллер для управления переходами между экранами
                 val navController = rememberNavController()
 
                 NavHost(
                     navController = navController,
-                    startDestination = APP_LIST_ROUTE // Стартовый экран - список приложений
+                    startDestination = APP_LIST_ROUTE
                 ) {
-                    // Экран со списком приложений
                     composable(route = APP_LIST_ROUTE) {
                         AppListScreen(
-                            apps = DataSource.appList,
                             onAppClick = { app ->
-                                // При клике на приложение переходим на экран деталей
                                 navController.navigate(appDetailsRoute(app.id))
                             }
                         )
                     }
 
-                    // Экран с деталями приложения
                     composable(route = APP_DETAILS_ROUTE) { backStackEntry ->
-                        // Извлекаем appId из аргументов навигации
                         val appId = backStackEntry.arguments?.getString("appId")?.toIntOrNull()
-                        // Находим приложение по ID в источнике данных
                         val app = DataSource.appList.find { it.id == appId }
 
                         if (app != null) {
-                            // Преобразуем App в AppDetails с дополнительной информацией
                             val appDetails = createAppDetails(app)
                             AppDetailsScreen(
                                 appDetails = appDetails,
                                 onBackClick = {
-                                    navController.popBackStack() // Возврат на предыдущий экран
+                                    navController.popBackStack()
                                 }
                             )
                         }
@@ -67,10 +57,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/**
- * Функция для создания объекта AppDetails из базового App
- * Добавляет дополнительную информацию, для детального просмотра
- */
 
 private fun createAppDetails(app: com.example.applistdemo.data.App): AppDetails {
     return AppDetails(
