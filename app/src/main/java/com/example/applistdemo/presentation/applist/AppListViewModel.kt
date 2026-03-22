@@ -2,20 +2,21 @@ package com.example.applistdemo.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.applistdemo.data.DataSource
-import kotlinx.coroutines.delay
+import com.example.applistdemo.domain.repository.AppListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-/**
- * ViewModel для экрана списка приложений
- * Хранит состояние и обрабатывает события
- */
-class AppListViewModel : ViewModel() {
+// Добавляем @HiltViewModel
+@HiltViewModel
+class AppListViewModel @Inject constructor(
+    private val repository: AppListRepository  // Теперь получаем через DI
+) : ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state: StateFlow<AppListState> = _state.asStateFlow()
@@ -30,14 +31,13 @@ class AppListViewModel : ViewModel() {
     fun loadApps() {
         viewModelScope.launch {
             _state.value = AppListState.Loading
-            delay(500)
 
             try {
-                val apps = DataSource.appList
+                val apps = repository.getAppList()
                 _state.value = AppListState.Content(apps)
             } catch (e: Exception) {
                 _state.value = AppListState.Error
-                _events.send(AppListEvent.ShowSnackbar("Ошибка загрузки"))
+                _events.send(AppListEvent.ShowSnackbar("Ошибка загрузки: ${e.message}"))
             }
         }
     }
