@@ -1,7 +1,5 @@
 package com.example.applistdemo.presentation.applist
 
-import com.example.applistdemo.data.App
-
 // Состояние экрана списка приложений
 sealed class AppListState {
     object Loading : AppListState()
