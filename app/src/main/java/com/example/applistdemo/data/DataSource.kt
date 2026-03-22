@@ -1,14 +1,10 @@
-package com.example.applistdemo.data.datasource
+package com.example.applistdemo.data
 
 import com.example.applistdemo.R
-import com.example.applistdemo.data.model.App
 
-/**
- * Источник данных для списка приложений
- */
-class AppListDataSource {
-
-    private val appList = listOf(
+// Источник данных, содержащий предопределенный список приложений для демонстрации
+object DataSource {
+    val appList = listOf(
         App(1, "СберБанк Онлайн – с Салютом", "Больше чем банк", "Финансы", R.drawable.ic_sberbank),
         App(2, "Яндекс.Браузер — с Алисой", "Быстрый и безопасный браузер", "Инструменты", R.drawable.ic_yandex_browser),
         App(3, "Почта Mail.ru", "Почтовый клиент для любых ящиков", "Инструменты", R.drawable.ic_mail),
@@ -16,13 +12,4 @@ class AppListDataSource {
         App(5, "Мой МТС", "Мой МТС — центр экосистемы МТС", "Инструменты", R.drawable.ic_mts),
         App(6, "Яндекс — с Алисой", "Яндекс — поиск всегда под рукой", "Инструменты", R.drawable.ic_yandex)
     )
-
-    /**
-     * Получить список приложений
-     */
-    suspend fun getAppList(): List<App> {
-        // Имитация задержки загрузки
-        kotlinx.coroutines.delay(500)
-        return appList
-    }
 }
