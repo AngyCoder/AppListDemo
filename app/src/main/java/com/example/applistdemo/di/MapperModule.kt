@@ -1,6 +1,7 @@
 package com.example.applistdemo.di
 
-import com.example.applistdemo.data.mapper.AppDetailsMapper
+import com.example.applistdemo.data.mapper.AppDetailsNetworkMapper
+import com.example.applistdemo.data.mapper.CatalogAppMapper
 import com.example.applistdemo.data.mapper.CategoryMapper
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,9 @@ object MapperModule {
 
     @Provides
     @Singleton
-    fun provideAppDetailsMapper(
-        categoryMapper: CategoryMapper
-    ): AppDetailsMapper = AppDetailsMapper(categoryMapper)
+    fun provideCatalogAppMapper(): CatalogAppMapper = CatalogAppMapper()
+
+    @Provides
+    @Singleton
+    fun provideAppDetailsNetworkMapper(): AppDetailsNetworkMapper = AppDetailsNetworkMapper()
 }

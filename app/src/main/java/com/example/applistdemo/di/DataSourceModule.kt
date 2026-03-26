@@ -1,7 +1,7 @@
 package com.example.applistdemo.di
 
 import com.example.applistdemo.data.datasource.AppListDataSource
-import com.example.applistdemo.data.datasource.LocalAppDataSource
+import com.example.applistdemo.data.network.api.AppsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +14,7 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideAppListDataSource(): AppListDataSource = AppListDataSource()
-
-    @Provides
-    @Singleton
-    fun provideLocalAppDataSource(): LocalAppDataSource = LocalAppDataSource()
+    fun provideAppListDataSource(api: AppsApi): AppListDataSource {
+        return AppListDataSource(api)
+    }
 }

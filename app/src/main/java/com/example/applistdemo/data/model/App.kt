@@ -1,8 +1,5 @@
 package com.example.applistdemo.data.model
 
-/**
- * Модель данных для списка приложений
- */
 data class App(
     val id: Int,
     val name: String,

@@ -1,32 +1,30 @@
 package com.example.applistdemo.data.mapper
 
 import com.example.applistdemo.domain.appdetails.Category
+import javax.inject.Inject
 
-/**
- * Маппер для конвертации строковой категории из DTO в доменную Category
- */
-class CategoryMapper {
+class CategoryMapper @Inject constructor() {
 
     fun mapToDomain(category: String): Category {
-        return when (category) {
-            "Финансы" -> Category.FINANCE
-            "Инструменты" -> Category.UTILITIES
-            "Транспорт" -> Category.MAPS
-            "Социальные сети" -> Category.SOCIAL
-            "Игры" -> Category.GAME
-            "Образование" -> Category.EDUCATION
-            "Развлечения" -> Category.ENTERTAINMENT
-            "Музыка" -> Category.MUSIC
-            "Видео" -> Category.VIDEO
-            "Фотография" -> Category.PHOTOGRAPHY
-            "Здоровье" -> Category.HEALTH
-            "Спорт" -> Category.SPORTS
-            "Новости" -> Category.NEWS
-            "Книги" -> Category.BOOKS
-            "Бизнес" -> Category.BUSINESS
-            "Путешествия" -> Category.TRAVEL
-            "Еда" -> Category.FOOD
-            "Покупки" -> Category.SHOPPING
+        return when (category.lowercase()) {
+            "финансы" -> Category.FINANCE
+            "инструменты" -> Category.UTILITIES
+            "транспорт" -> Category.MAPS
+            "игры" -> Category.GAME
+            "социальные сети" -> Category.SOCIAL
+            "образование" -> Category.EDUCATION
+            "развлечения" -> Category.ENTERTAINMENT
+            "музыка" -> Category.MUSIC
+            "видео" -> Category.VIDEO
+            "фотография" -> Category.PHOTOGRAPHY
+            "здоровье" -> Category.HEALTH
+            "спорт" -> Category.SPORTS
+            "новости" -> Category.NEWS
+            "книги" -> Category.BOOKS
+            "бизнес" -> Category.BUSINESS
+            "путешествия" -> Category.TRAVEL
+            "еда" -> Category.FOOD
+            "покупки" -> Category.SHOPPING
             else -> Category.APP
         }
     }

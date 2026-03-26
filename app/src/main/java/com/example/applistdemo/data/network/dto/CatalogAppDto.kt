@@ -2,10 +2,6 @@ package com.example.applistdemo.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * DTO для списка приложений из сети
- * GET http://185.103.109.134/catalog
- */
 data class CatalogAppDto(
     @SerializedName("id")
     val id: Int,

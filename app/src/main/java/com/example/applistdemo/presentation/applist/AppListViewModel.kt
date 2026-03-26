@@ -2,7 +2,8 @@ package com.example.applistdemo.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.applistdemo.domain.repository.AppListRepository
+import com.example.applistdemo.data.datasource.AppListDataSource
+import com.example.applistdemo.data.model.App
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,10 +13,19 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// Добавляем @HiltViewModel
+sealed class AppListState {
+    data object Loading : AppListState()
+    data class Content(val apps: List<App>) : AppListState()
+    data object Error : AppListState()
+}
+
+sealed class AppListEvent {
+    data class ShowSnackbar(val message: String) : AppListEvent()
+}
+
 @HiltViewModel
 class AppListViewModel @Inject constructor(
-    private val repository: AppListRepository  // Теперь получаем через DI
+    private val dataSource: AppListDataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
@@ -33,18 +43,23 @@ class AppListViewModel @Inject constructor(
             _state.value = AppListState.Loading
 
             try {
-                val apps = repository.getAppList()
-                _state.value = AppListState.Content(apps)
+                val apps = dataSource.getAppList()
+                if (apps.isNotEmpty()) {
+                    _state.value = AppListState.Content(apps)
+                } else {
+                    _state.value = AppListState.Error
+                    _events.send(AppListEvent.ShowSnackbar("Нет данных"))
+                }
             } catch (e: Exception) {
                 _state.value = AppListState.Error
-                _events.send(AppListEvent.ShowSnackbar("Ошибка загрузки: ${e.message}"))
+                _events.send(AppListEvent.ShowSnackbar("Ошибка: ${e.message}"))
             }
         }
     }
 
     fun onLogoClick(appName: String) {
         viewModelScope.launch {
-            _events.send(AppListEvent.ShowSnackbar("Логотип приложения: $appName"))
+            _events.send(AppListEvent.ShowSnackbar("Логотип: $appName"))
         }
     }
 }
