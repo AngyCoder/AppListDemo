@@ -1,23 +1,18 @@
 package com.example.applistdemo.data.repository
 
-import com.example.applistdemo.data.datasource.LocalAppDataSource
-import com.example.applistdemo.data.mapper.AppDetailsMapper
+import com.example.applistdemo.data.mapper.AppDetailsNetworkMapper
+import com.example.applistdemo.data.network.api.AppsApi
 import com.example.applistdemo.domain.appdetails.AppDetails
 import com.example.applistdemo.domain.repository.AppDetailsRepository
 import javax.inject.Inject
 
-/**
- * Реализация репозитория для получения детальной информации о приложении
- */
 class AppDetailsRepositoryImpl @Inject constructor(
-    private val localDataSource: LocalAppDataSource,
-    private val mapper: AppDetailsMapper
+    private val api: AppsApi,
+    private val mapper: AppDetailsNetworkMapper
 ) : AppDetailsRepository {
 
     override suspend fun getAppDetails(appId: String): AppDetails {
-        val dto = localDataSource.getAppDetails(appId)
-            ?: throw IllegalArgumentException("Приложение не найдено с id: $appId")
-
-        return mapper.mapToDomain(dto)
+        val response = api.getAppDetails(appId)
+        return mapper.mapToDomain(response)
     }
 }
