@@ -2,7 +2,8 @@ package com.example.applistdemo.domain.appdetails
 
 import androidx.annotation.DrawableRes
 
-// Модель данных для детальной информации о приложении
+// Доменная модель детальной информации о приложении
+
 data class AppDetails(
     val id: String,
     val name: String,
@@ -10,7 +11,7 @@ data class AppDetails(
     val category: Category,
     val ageRating: Int,
     val size: Float,
-    @field:DrawableRes val iconResId: Int,
-    @field:DrawableRes val screenshotResIds: List<Int>,
+    val iconUrl: String,  // URL иконки с сервера
+    val screenshotUrls: List<String>,  // URL скриншотов
     val description: String
 )
